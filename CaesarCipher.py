@@ -8,18 +8,18 @@ alphabet = [
 def encryptionAndDecryption(direction,message,shift):
     output = ""
     for letter in message:
-       if letter not in alphabet:
+       if letter not in alphabet: #this is to keep the whitespaces or characters that aren't letters as is
            output+=letter
        else:   
            if direction == "encode":
              shiftedPosition = alphabet.index(letter) + shift #this is the index of the letter in message + its shift
            elif direction == "decode":
              shiftedPosition = alphabet.index(letter) - shift #this is the index of the letter in message - its shift
-           shiftedPosition %= len(alphabet)# this is the edge case of it going over the alphabet length size 
+           shiftedPosition %= len(alphabet)# this is to ensure its always between 0 and 25 never over or under
            output += alphabet[shiftedPosition]
     print(f"Here is the {direction}d result: {output}")
 
-restart = True
+restart = True #flag for whether the user wants to go again or exit 
 while restart:
     direction = input("Which way do you want to go, encode or decode?: ").lower()
     while direction != "encode" and direction != "decode":
